@@ -1,0 +1,2 @@
+-keep class com.nutritrack.** { *; }
+-keep class com.google.mlkit.** { *; }

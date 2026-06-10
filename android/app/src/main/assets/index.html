@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>NutriTrack</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Header ── -->
+    <header id="app-header">
+      <div class="header-left">
+        <span class="app-logo">🥦</span>
+        <div>
+          <h1 class="app-title">NutriTrack</h1>
+          <p class="header-date" id="header-date"></p>
+        </div>
+      </div>
+      <button class="icon-btn" id="settings-btn" title="Profile & Settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </button>
+    </header>
+
+    <!-- ── Main Content ── -->
+    <main id="main-content">
+
+      <!-- ══ DASHBOARD ══ -->
+      <section class="page active" id="page-dashboard">
+
+        <div class="card calorie-card">
+          <div class="calorie-ring-wrapper">
+            <svg class="calorie-ring" viewBox="0 0 180 180" id="calorie-svg">
+              <circle class="ring-bg"   cx="90" cy="90" r="75"/>
+              <circle class="ring-fill" cx="90" cy="90" r="75" id="calorie-ring-fill"/>
+            </svg>
+            <div class="calorie-center">
+              <div class="cal-consumed" id="dash-cal-consumed">0</div>
+              <div class="cal-label">eaten</div>
+              <div class="cal-divider"></div>
+              <div class="cal-remaining" id="dash-cal-remaining">2,600</div>
+              <div class="cal-label">left</div>
+            </div>
+          </div>
+          <div class="calorie-stats">
+            <div class="cal-stat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <div>
+                <div class="cal-stat-value" id="dash-cal-goal">2,600</div>
+                <div class="cal-stat-label">goal</div>
+              </div>
+            </div>
+            <div class="cal-stat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <div>
+                <div class="cal-stat-value" id="dash-cal-burned">~350</div>
+                <div class="cal-stat-label">burned est.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Macronutrients</h2>
+          <div class="macro-list">
+            <div class="macro-item">
+              <div class="macro-header"><span class="macro-name protein">Protein</span><span class="macro-values" id="dash-protein-val">0 / 205g</span></div>
+              <div class="progress-bar"><div class="progress-fill protein-fill" id="dash-protein-bar" style="width:0%"></div></div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-header"><span class="macro-name carbs">Carbohydrates</span><span class="macro-values" id="dash-carbs-val">0 / 260g</span></div>
+              <div class="progress-bar"><div class="progress-fill carbs-fill" id="dash-carbs-bar" style="width:0%"></div></div>
+            </div>
+            <div class="macro-item">
+              <div class="macro-header"><span class="macro-name fat">Fat</span><span class="macro-values" id="dash-fat-val">0 / 82g</span></div>
+              <div class="progress-bar"><div class="progress-fill fat-fill" id="dash-fat-bar" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 class="section-title">Micronutrients</h2>
+          <div class="micro-grid">
+            <div class="micro-item">
+              <div class="micro-ring-wrap"><svg class="micro-ring" viewBox="0 0 44 44"><circle class="micro-bg" cx="22" cy="22" r="18"/><circle class="micro-arc fiber-arc" cx="22" cy="22" r="18" id="micro-fiber-arc"/></svg><span class="micro-pct" id="micro-fiber-pct">0%</span></div>
+              <div class="micro-label">Fiber</div><div class="micro-val" id="micro-fiber-val">0/38g</div>
+            </div>
+            <div class="micro-item">
+              <div class="micro-ring-wrap"><svg class="micro-ring" viewBox="0 0 44 44"><circle class="micro-bg" cx="22" cy="22" r="18"/><circle class="micro-arc sodium-arc" cx="22" cy="22" r="18" id="micro-sodium-arc"/></svg><span class="micro-pct" id="micro-sodium-pct">0%</span></div>
+              <div class="micro-label">Sodium</div><div class="micro-val" id="micro-sodium-val">0/2300mg</div>
+            </div>
+            <div class="micro-item">
+              <div class="micro-ring-wrap"><svg class="micro-ring" viewBox="0 0 44 44"><circle class="micro-bg" cx="22" cy="22" r="18"/><circle class="micro-arc sugar-arc" cx="22" cy="22" r="18" id="micro-sugar-arc"/></svg><span class="micro-pct" id="micro-sugar-pct">0%</span></div>
+              <div class="micro-label">Sugar</div><div class="micro-val" id="micro-sugar-val">0/52g</div>
+            </div>
+            <div class="micro-item">
+              <div class="micro-ring-wrap"><svg class="micro-ring" viewBox="0 0 44 44"><circle class="micro-bg" cx="22" cy="22" r="18"/><circle class="micro-arc satfat-arc" cx="22" cy="22" r="18" id="micro-satfat-arc"/></svg><span class="micro-pct" id="micro-satfat-pct">0%</span></div>
+              <div class="micro-label">Sat. Fat</div><div class="micro-val" id="micro-satfat-val">0/22g</div>
+            </div>
+            <div class="micro-item">
+              <div class="micro-ring-wrap"><svg class="micro-ring" viewBox="0 0 44 44"><circle class="micro-bg" cx="22" cy="22" r="18"/><circle class="micro-arc potassium-arc" cx="22" cy="22" r="18" id="micro-potassium-arc"/></svg><span class="micro-pct" id="micro-potassium-pct">0%</span></div>
+              <div class="micro-label">Potassium</div><div class="micro-val" id="micro-potassium-val">0/3400mg</div>
+            </div>
+            <div class="micro-item">
+              <div class="micro-ring-wrap"><svg class="micro-ring" viewBox="0 0 44 44"><circle class="micro-bg" cx="22" cy="22" r="18"/><circle class="micro-arc chol-arc" cx="22" cy="22" r="18" id="micro-chol-arc"/></svg><span class="micro-pct" id="micro-chol-pct">0%</span></div>
+              <div class="micro-label">Cholesterol</div><div class="micro-val" id="micro-chol-val">0/300mg</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-header">
+            <h2 class="section-title">Today's Meals</h2>
+            <button class="add-meal-btn" id="dash-add-btn">+ Add Food</button>
+          </div>
+          <div id="meals-list">
+            <div class="empty-state" id="meals-empty">
+              <div class="empty-icon">🍽️</div>
+              <p>No meals logged yet today.</p>
+              <p class="empty-hint">Scan a label or add food manually.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══ SCAN PAGE ══ -->
+      <section class="page" id="page-scan">
+        <div class="card">
+          <h2 class="section-title">Scan Nutrition Label</h2>
+          <p class="section-subtitle">Point your camera at a nutrition facts label — ML Kit reads it on-device, no internet needed.</p>
+
+          <div class="scan-btn-group">
+            <button class="btn btn-primary scan-big-btn" id="scan-camera-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              Take Photo
+            </button>
+            <button class="btn btn-secondary scan-big-btn" id="scan-gallery-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              From Gallery
+            </button>
+          </div>
+
+          <div class="scan-status hidden" id="scan-status">
+            <div class="scan-spinner"></div>
+            <span id="scan-status-text">Analyzing label…</span>
+          </div>
+
+          <div id="scan-error" class="alert alert-error hidden"></div>
+        </div>
+
+        <!-- Results form (hidden until OCR completes) -->
+        <div class="card hidden" id="scan-results-card">
+          <h2 class="section-title">Nutrition Facts</h2>
+          <p class="section-subtitle">Review and adjust values, then add to your log.</p>
+
+          <div class="form-group">
+            <label>Food Name</label>
+            <input type="text" id="res-name" class="form-input" placeholder="e.g. Greek Yogurt" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Serving Size</label>
+              <input type="text" id="res-serving" class="form-input" placeholder="1 cup (240g)" />
+            </div>
+            <div class="form-group">
+              <label>Servings</label>
+              <input type="number" id="res-servings-count" class="form-input" value="1" min="0.25" step="0.25" />
+            </div>
+          </div>
+
+          <div class="nutrition-facts-box">
+            <div class="nf-header">Nutrition Facts <span class="nf-serving-note">(per serving)</span></div>
+            <div class="nf-calories-row"><span>Calories</span><input type="number" id="res-calories" class="nf-input" min="0" /></div>
+            <div class="nf-divider thick"></div>
+            <div class="nf-row"><span>Total Fat</span><div><input type="number" id="res-fat" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row indent"><span>Saturated Fat</span><div><input type="number" id="res-satfat" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row indent"><span>Trans Fat</span><div><input type="number" id="res-transfat" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row"><span>Cholesterol</span><div><input type="number" id="res-chol" class="nf-input" min="0" />mg</div></div>
+            <div class="nf-row"><span>Sodium</span><div><input type="number" id="res-sodium" class="nf-input" min="0" />mg</div></div>
+            <div class="nf-row"><span>Total Carbohydrate</span><div><input type="number" id="res-carbs" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row indent"><span>Dietary Fiber</span><div><input type="number" id="res-fiber" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row indent"><span>Total Sugars</span><div><input type="number" id="res-sugar" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row indent2"><span>Added Sugars</span><div><input type="number" id="res-addedsugars" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-row bold"><span>Protein</span><div><input type="number" id="res-protein" class="nf-input" min="0" step="0.1" />g</div></div>
+            <div class="nf-divider thick"></div>
+            <div class="nf-row"><span>Potassium</span><div><input type="number" id="res-potassium" class="nf-input" min="0" />mg</div></div>
+            <div class="nf-row"><span>Calcium</span><div><input type="number" id="res-calcium" class="nf-input" min="0" />mg</div></div>
+            <div class="nf-row"><span>Iron</span><div><input type="number" id="res-iron" class="nf-input" min="0" step="0.1" />mg</div></div>
+            <div class="nf-row"><span>Vitamin D</span><div><input type="number" id="res-vitamind" class="nf-input" min="0" step="0.1" />mcg</div></div>
+          </div>
+
+          <div class="form-group">
+            <label>Meal</label>
+            <select id="res-meal-type" class="form-input">
+              <option value="breakfast">🌅 Breakfast</option>
+              <option value="lunch">☀️ Lunch</option>
+              <option value="dinner">🌙 Dinner</option>
+              <option value="snack">🍎 Snack</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary w-full" id="scan-add-btn">✓ Add to Today's Log</button>
+          <button class="btn btn-secondary w-full mt8" id="scan-rescan-btn">↩ Scan Again</button>
+        </div>
+      </section>
+
+      <!-- ══ LOG PAGE ══ -->
+      <section class="page" id="page-log">
+        <div class="card">
+          <h2 class="section-title">Add Food Manually</h2>
+          <p class="section-subtitle">Enter nutrition info by hand.</p>
+          <form id="manual-log-form">
+            <div class="form-group">
+              <label>Food Name *</label>
+              <input type="text" id="log-name" class="form-input" placeholder="e.g. Grilled Chicken Breast" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Serving Size</label>
+                <input type="text" id="log-serving" class="form-input" placeholder="100g" />
+              </div>
+              <div class="form-group">
+                <label>Servings</label>
+                <input type="number" id="log-servings-count" class="form-input" value="1" min="0.25" step="0.25" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Meal</label>
+              <select id="log-meal-type" class="form-input">
+                <option value="breakfast">🌅 Breakfast</option>
+                <option value="lunch">☀️ Lunch</option>
+                <option value="dinner">🌙 Dinner</option>
+                <option value="snack">🍎 Snack</option>
+              </select>
+            </div>
+            <div class="nutrition-facts-box">
+              <div class="nf-header">Nutrition Facts <span class="nf-serving-note">(per serving)</span></div>
+              <div class="nf-calories-row"><span>Calories *</span><input type="number" id="log-calories" class="nf-input" min="0" required /></div>
+              <div class="nf-divider thick"></div>
+              <div class="nf-row"><span>Total Fat</span><div><input type="number" id="log-fat" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-row indent"><span>Saturated Fat</span><div><input type="number" id="log-satfat" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-row indent"><span>Trans Fat</span><div><input type="number" id="log-transfat" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-row"><span>Cholesterol</span><div><input type="number" id="log-chol" class="nf-input" min="0" />mg</div></div>
+              <div class="nf-row"><span>Sodium</span><div><input type="number" id="log-sodium" class="nf-input" min="0" />mg</div></div>
+              <div class="nf-row"><span>Total Carbohydrate</span><div><input type="number" id="log-carbs" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-row indent"><span>Dietary Fiber</span><div><input type="number" id="log-fiber" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-row indent"><span>Total Sugars</span><div><input type="number" id="log-sugar" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-row bold"><span>Protein</span><div><input type="number" id="log-protein" class="nf-input" min="0" step="0.1" />g</div></div>
+              <div class="nf-divider thick"></div>
+              <div class="nf-row"><span>Potassium</span><div><input type="number" id="log-potassium" class="nf-input" min="0" />mg</div></div>
+              <div class="nf-row"><span>Calcium</span><div><input type="number" id="log-calcium" class="nf-input" min="0" />mg</div></div>
+              <div class="nf-row"><span>Iron</span><div><input type="number" id="log-iron" class="nf-input" min="0" step="0.1" />mg</div></div>
+            </div>
+            <button type="submit" class="btn btn-primary w-full">✓ Add to Today's Log</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ══ HISTORY PAGE ══ -->
+      <section class="page" id="page-history">
+        <div class="card">
+          <h2 class="section-title">History</h2>
+          <div id="history-list">
+            <div class="empty-state" id="history-empty">
+              <div class="empty-icon">📅</div>
+              <p>No history yet.</p>
+              <p class="empty-hint">Start tracking to see your history here.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ── Bottom Nav ── -->
+    <nav id="bottom-nav">
+      <button class="nav-item active" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item" data-page="scan">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span>Scan</span>
+      </button>
+      <button class="nav-item" data-page="log">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Log Food</span>
+      </button>
+      <button class="nav-item" data-page="history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span>History</span>
+      </button>
+    </nav>
+
+    <!-- ── Settings Modal ── -->
+    <div class="modal-overlay hidden" id="settings-modal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Profile & Backup</h2>
+          <button class="icon-btn" id="settings-close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <form id="settings-form">
+          <div class="form-row">
+            <div class="form-group"><label>Age</label><input type="number" id="prf-age" class="form-input" value="30" min="15" max="99" /></div>
+            <div class="form-group"><label>Weight (lbs)</label><input type="number" id="prf-weight" class="form-input" value="205" min="80" max="500" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Height (ft)</label><input type="number" id="prf-height-ft" class="form-input" value="5" min="4" max="7" /></div>
+            <div class="form-group"><label>Height (in)</label><input type="number" id="prf-height-in" class="form-input" value="10" min="0" max="11" /></div>
+          </div>
+          <div class="form-group">
+            <label>Sex</label>
+            <select id="prf-sex" class="form-input">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Activity Level</label>
+            <select id="prf-activity" class="form-input">
+              <option value="sedentary">Sedentary</option>
+              <option value="light">Light (1-3 days/week)</option>
+              <option value="moderate" selected>Moderate (3-5 days/week)</option>
+              <option value="active">Active (6-7 days/week)</option>
+              <option value="very_active">Very Active</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Goal</label>
+            <select id="prf-goal" class="form-input">
+              <option value="recomposition" selected>Lose Fat + Gain Muscle</option>
+              <option value="cut">Aggressive Cut</option>
+              <option value="maintain">Maintain</option>
+              <option value="bulk">Bulk</option>
+            </select>
+          </div>
+
+          <div class="targets-preview" id="targets-preview"></div>
+
+          <button type="submit" class="btn btn-primary w-full">Save Profile</button>
+        </form>
+
+        <!-- Backup / Restore -->
+        <div class="backup-section">
+          <div class="backup-title">Data Backup</div>
+          <div class="backup-row">
+            <button class="btn btn-secondary flex-1" id="export-btn">⬇ Export JSON</button>
+            <button class="btn btn-secondary flex-1" id="import-btn">⬆ Import JSON</button>
+          </div>
+          <p class="backup-hint">Your data is stored in the app. Export regularly as a backup. Import restores a previous export.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast hidden" id="toast"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
